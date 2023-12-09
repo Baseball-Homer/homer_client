@@ -3,9 +3,9 @@
     class="mx-auto"
     max-width="600"
   >
-    <v-card-title class="text-h5">
-      내 감독
-    </v-card-title>
+    <div class="text-truncate ml-3 mt-3">
+      <h1>내 감독</h1>
+    </div>
 
     <v-img
       height="200"

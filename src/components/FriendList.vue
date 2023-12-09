@@ -4,7 +4,7 @@
     max-width="600"
   >
     <v-list lines="two">
-      <v-list-subheader inset>
+      <v-list-subheader>
         내 친구들
       </v-list-subheader>
 
@@ -14,7 +14,7 @@
         :title="friend.name"
       >
         <template #prepend>
-          <v-avatar color="grey-lighten-1">
+          <v-avatar>
             <v-icon>mdi-account</v-icon>
           </v-avatar>
         </template>

@@ -4,22 +4,23 @@
     :items-per-page="itemsPerPage"
   >
     <template #header="{ page, pageCount, prevPage, nextPage }">
-      <h1
-        class="text-h4 font-weight-bold d-flex justify-space-between mb-4 align-center"
+      <div
+        class="d-flex justify-space-between mb-4"
       >
-        <div class="text-truncate">
+        <div class="text-h4 font-weight-bold ma-3">
           내 스쿼드
         </div>
 
         <div class="d-flex align-center">
           <v-btn
+            class="mr-4"
             prepend-icon="mdi-baseball-diamond"
             @click="goSquad"
           >
             내 스쿼드 편집
           </v-btn>
 
-          <div class="d-inline-flex">
+          <div class="d-inline-flex mr-4">
             <v-btn
               :disabled="page === 1"
               icon="mdi-arrow-left"
@@ -38,7 +39,7 @@
             />
           </div>
         </div>
-      </h1>
+      </div>
     </template>
 
     <template #default="{ items }">
@@ -48,13 +49,12 @@
           :key="i"
           cols="6"
           sm="4"
-          xl="3"
         >
           <v-sheet border>
             <v-img
               :src="item.raw.image"
-              max-width="200px"
-              max-height="400px"
+              max-width="300px"
+              max-height="410px"
             />
 
             <v-list-item
