@@ -1,13 +1,23 @@
 <template>
-  <v-data-iterator :items="players" :items-per-page="itemsPerPage">
+  <v-data-iterator
+    :items="players"
+    :items-per-page="itemsPerPage"
+  >
     <template #header="{ page, pageCount, prevPage, nextPage }">
       <h1
         class="text-h4 font-weight-bold d-flex justify-space-between mb-4 align-center"
       >
-        <div class="text-truncate">내 스쿼드</div>
+        <div class="text-truncate">
+          내 스쿼드
+        </div>
 
         <div class="d-flex align-center">
-          <v-btn prepend-icon="mdi-baseball-diamond" @click="goSquad"> 내 스쿼드 편집 </v-btn>
+          <v-btn
+            prepend-icon="mdi-baseball-diamond"
+            @click="goSquad"
+          >
+            내 스쿼드 편집
+          </v-btn>
 
           <div class="d-inline-flex">
             <v-btn
@@ -33,9 +43,19 @@
 
     <template #default="{ items }">
       <v-row>
-        <v-col v-for="(item, i) in items" :key="i" cols="6" sm="4" xl="3">
+        <v-col
+          v-for="(item, i) in items"
+          :key="i"
+          cols="6"
+          sm="4"
+          xl="3"
+        >
           <v-sheet border>
-            <v-img :src="item.raw.image" max-width="200px" max-height="400px" />
+            <v-img
+              :src="item.raw.image"
+              max-width="200px"
+              max-height="400px"
+            />
 
             <v-list-item
               :title="item.raw.firstName"
@@ -50,9 +70,15 @@
               </template>
             </v-list-item>
 
-            <v-table density="compact" class="text-caption">
+            <v-table
+              density="compact"
+              class="text-caption"
+            >
               <!--TODO 한글로 변경  -->
-              <tbody v-for="(value, key) in item.raw.stats" :key="key">
+              <tbody
+                v-for="(value, key) in item.raw.stats"
+                :key="key"
+              >
                 <tr align="right">
                   <th>{{ key }}:</th>
 

@@ -1,7 +1,12 @@
 <template>
-  <v-card class="mx-auto" max-width="600">
+  <v-card
+    class="mx-auto"
+    max-width="600"
+  >
     <v-list lines="two">
-      <v-list-subheader inset> 내 친구들 </v-list-subheader>
+      <v-list-subheader inset>
+        내 친구들
+      </v-list-subheader>
 
       <v-list-item
         v-for="friend in friends"
@@ -16,7 +21,10 @@
 
         <template #append>
           <div class="text-center">
-            <v-btn append-icon="mdi-baseball" @click="goMatch">
+            <v-btn
+              append-icon="mdi-baseball"
+              @click="goMatch"
+            >
               대결하기
             </v-btn>
           </div>

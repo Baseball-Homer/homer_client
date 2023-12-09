@@ -1,8 +1,16 @@
 <template>
-  <v-card class="mx-auto" max-width="600">
-    <v-card-title class="text-h5"> 내 감독 </v-card-title>
+  <v-card
+    class="mx-auto"
+    max-width="600"
+  >
+    <v-card-title class="text-h5">
+      내 감독
+    </v-card-title>
 
-    <v-img height="200" :src="manager.image" />
+    <v-img
+      height="200"
+      :src="manager.image"
+    />
 
     <v-card-title class="pt-4">
       {{ manager.name }}

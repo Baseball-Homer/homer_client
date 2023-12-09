@@ -12,6 +12,10 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/squad",
+    component: () => import("@/views/SquadView.vue"),
+  },
 ];
 
 const router = createRouter({
