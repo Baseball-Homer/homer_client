@@ -1,5 +1,8 @@
 <template>
-  <v-app-bar flat>
+  <v-app-bar
+    flat
+    @click="goHome"
+  >
     <v-app-bar-title>
       <v-icon icon="mdi-baseball" />
       Homer
@@ -8,5 +11,9 @@
 </template>
 
 <script setup>
-//
+
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+const goHome = () => router.push('/');
 </script>
