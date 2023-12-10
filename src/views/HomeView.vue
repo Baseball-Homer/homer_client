@@ -9,6 +9,28 @@
           >
             <v-sheet
               rounded="lg"
+            >
+              <my-info />
+            </v-sheet>
+          </v-col>
+          <v-col
+            cols="12"
+            md="9"
+          >
+            <v-sheet
+              rounded="lg"
+            >
+              <my-squad-result />
+            </v-sheet>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            md="3"
+          >
+            <v-sheet
+              rounded="lg"
               min-height="268"
             >
               <manager />
@@ -45,6 +67,8 @@ import MySquadList from "@/components/MySquadList.vue";
 import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
 import {onMounted} from "vue";
+import MyInfo from "@/components/MyInfo.vue";
+import MySquadResult from "@/components/MySquadResult.vue";
 
 const userStore = useUserStore();
 const squadStore = useSquadStore();
