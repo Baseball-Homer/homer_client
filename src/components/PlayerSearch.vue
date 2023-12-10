@@ -68,13 +68,12 @@
                       class="mx-auto"
                       max-width="500"
                       :title="getName(item)"
-                      :subtitle="getClubAndPositionName(item)"
+                      :subtitle="getPrimaryNumber(item)"
                       :prepend-avatar="item.image"
                     >
                       <v-card-text>
-                        <!--TODO 한글로 변경  -->
                         <tbody
-                          v-for="(value, key) in item.stats"
+                          v-for="(value, key) in extractAbility(item)"
                           :key="key"
                         >
                           <tr>
@@ -94,8 +93,11 @@
               </template>
 
               <v-list-item-title class="ml-5">
-                {{ `${item.firstName} ${item.lastName}` }}
+                {{ getName(item) }}
               </v-list-item-title>
+              <v-list-item-subtitle class="ml-5">
+                {{ getPrimaryNumber(item) }}
+              </v-list-item-subtitle>
             </v-list-item>
           </v-radio-group>
         </v-list>
@@ -131,8 +133,8 @@ import {storeToRefs} from "pinia";
 const {players} = storeToRefs(usePlayerStore());
 
 const getName = ({firstName, lastName}) => `${firstName} ${lastName}`;
-const getClubAndPositionName = ({clubName, positionName}) =>
-  `${clubName} (${positionName})`;
+const getPrimaryNumber = ({primaryNum})=> `No. ${primaryNum}`;
+const extractAbility = ({contact, control, discipline, power, stuff}) => ({contact, control, discipline, power, stuff});
 
 const props = defineProps({
   showDialog: Boolean,

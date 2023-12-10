@@ -164,16 +164,20 @@ import ManagerSearch from "@/components/ManagerSearch.vue";
 import {usePlayerStore} from "@/store/player";
 import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
+import {useRoute} from "vue-router";
 
 const {fetchPlayers, resetPlayers} = usePlayerStore();
 const {user} = useUserStore();
 const squadStore = useSquadStore();
+const {createSquad, updateSquad} = squadStore;
+const route = useRoute();
+const {mode} = route.query;
 
 const addImageUrl = 'src/assets/add.png';
 const manager = ref(squadStore.squad.manager);
 const showPlayerPopup = ref(false);
 const showManagerPopup = ref(false);
-const players = reactive(squadStore.players);
+const players = reactive([...squadStore.players]);
 const position = ref(0);
 
 
@@ -190,10 +194,10 @@ const onClickManagerAdd = () => (showManagerPopup.value = !showManagerPopup.valu
 const onClickSaveButton = () => {
   const {managerId} = manager.value;
   const {userId} = user;
-  const playerReqs = players.map((player, position)=>({ position, playerId: player.playerId}));
+  const playerReqs = players.map((player, position) => ({position, playerId: player.playerId}));
 
   console.log({
-    managerId,userId,players: playerReqs
+    managerId, userId, players: playerReqs
   })
 }
 
@@ -222,8 +226,9 @@ const searchPlayer = ({clubId, playerName}) => {
 }
 
 .v-row {
-  height:50px;
+  height: 50px;
 }
+
 .v-col {
 
 }

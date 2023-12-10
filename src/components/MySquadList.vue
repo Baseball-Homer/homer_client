@@ -118,18 +118,22 @@ import {useSquadStore} from "@/store/squad";
 const {players} = storeToRefs(useSquadStore());
 
 const router = useRouter();
-const goSquad = () => router.push('/squad');
+const goSquad = () => {
+  const mode = players.value.length ? 'edit' : 'new';
+  console.log(mode);
+  router.push(`/squad?mode=${mode}`);
+}
 
 const getName = ({ primaryNum, firstName, lastName }) => `No.${primaryNum}  ${firstName} ${lastName}`;
 const getClubAndPositionName = ({ clubName, positionName }) => `${clubName} (${positionName})`;
 
 const isPitcher = (positionNumber) => positionNumber === 0 || positionNumber === 1;
 
-const extractStat = ({position, gamePlayed, innings, wins, losses, homeruns, plates}) => {
+const extractStat = ({position, gamePlayed, innings ,wins, losses, homeruns, plates, era, avg}) => {
   if (isPitcher(position)) {
-    return {gamePlayed, innings, wins, losses};
+    return {gamePlayed, innings, wins, losses, era};
   } else {
-    return {gamePlayed, homeruns, plates};
+    return {gamePlayed, plates, homeruns, avg};
   }
 }
 
