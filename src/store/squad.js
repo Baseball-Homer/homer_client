@@ -69,6 +69,14 @@ export const useSquadStore = defineStore("squad", {
     async fetchSquadStatistics(userId) {
       const {data} = await api.squad.getSquadStatistics(userId);
       this.squadStat = data;
+    },
+
+    async updateSquad(req) {
+      await api.squad.updateSquad(req);
+    },
+
+    async createSquad(req){
+      await api.squad.createSquad(req);
     }
   }
 });

@@ -12,7 +12,7 @@
       >
         <squad-player
           :player="players[7]"
-          @open="()=>onClickPlayerAddButton(7)"
+          @open="()=>onClickPlayerAddButton(8)"
         />
       </v-col>
       <v-spacer />
@@ -128,7 +128,7 @@
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 import PlayerSearch from "@/components/PlayerSearch.vue";
 import ManagerSearch from "@/components/ManagerSearch.vue";
 import {usePlayerStore} from "@/store/player";
@@ -136,19 +136,18 @@ import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
 import {useRoute} from "vue-router";
 import SquadPlayer from "@/components/SquadPlayer.vue";
+import {storeToRefs} from "pinia";
 
 const {fetchPlayers, resetPlayers} = usePlayerStore();
 const {user} = useUserStore();
-const squadStore = useSquadStore();
-const {createSquad, updateSquad} = squadStore;
+const {createSquad, updateSquad} = useSquadStore();
+const {players, manager} = storeToRefs(useSquadStore());
 const route = useRoute();
 const {mode} = route.query;
 
 const addImageUrl = 'src/assets/add.png';
-const manager = ref(squadStore.squad.manager);
 const showPlayerPopup = ref(false);
 const showManagerPopup = ref(false);
-const players = reactive([...squadStore.players]);
 const position = ref(0);
 
 
@@ -164,16 +163,18 @@ const onClickPlayerPopupClose = () => {
 const onClickManagerAdd = () => (showManagerPopup.value = !showManagerPopup.value);
 const onClickSaveButton = () => {
   const {managerId} = manager.value;
-  const {userId} = user;
-  const playerReqs = players.map((player, position) => ({position, playerId: player.playerId}));
+  const {userId, squadId} = user;
+  const playerReqs = players.value.map((player, position) => ({position: position+1, playerId: player.playerId}));
 
-  console.log({
-    managerId, userId, players: playerReqs
-  })
+  const req = {managerId, userId, squadId, players: playerReqs};
+
+  mode === 'new' ? createSquad(req) : updateSquad(req);
+
+  alert('success!');
 }
 
 const setManager = selectedManager => manager.value = selectedManager;
-const setPlayer = (position, selectedPlayer) => players[position] = selectedPlayer;
+const setPlayer = (position, selectedPlayer) => players.value[position] = selectedPlayer;
 
 const searchPlayer = ({clubId, playerName}) => {
   fetchPlayers({
@@ -198,9 +199,5 @@ const searchPlayer = ({clubId, playerName}) => {
 
 .v-row {
   height: 100px;
-}
-
-.v-col {
-
 }
 </style>

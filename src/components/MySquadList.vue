@@ -120,7 +120,6 @@ const {players} = storeToRefs(useSquadStore());
 const router = useRouter();
 const goSquad = () => {
   const mode = players.value.length ? 'edit' : 'new';
-  console.log(mode);
   router.push(`/squad?mode=${mode}`);
 }
 

@@ -74,7 +74,7 @@ const userStore = useUserStore();
 const squadStore = useSquadStore();
 
 onMounted(async ()=>{
-  await userStore.fetchAll(1);
+  await userStore.fetchAll();
   await squadStore.fetchAll();
 });
 

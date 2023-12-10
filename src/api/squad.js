@@ -12,9 +12,9 @@ export default {
         UserId: userId, managerId, players
     });
   },
-  updateSquad({managerId, userId, players}){
+  updateSquad({managerId, userId, players, squadId}){
     return request.put('/squads', {
-      UserId: userId, managerId, players
+      UserId: userId, managerId, players, squadId
     });
   }
 }

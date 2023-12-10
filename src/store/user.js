@@ -12,7 +12,8 @@ export const useUserStore = defineStore("user", {
     otherUsers: []
   }),
   actions: {
-    async fetchAll(userId) {
+    async fetchAll() {
+      const userId = localStorage.getItem('userId') || 1;
       await this.fetchUser(userId);
       await this.fetchOtherUser(userId);
     },
