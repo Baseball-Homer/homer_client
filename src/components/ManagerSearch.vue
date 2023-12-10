@@ -63,9 +63,8 @@ import {storeToRefs} from "pinia";
 import {usePlayerStore} from "@/store/player";
 
 
-const managerStore = usePlayerStore();
-const {fetchManagers} = managerStore;
-const {managers} = storeToRefs(managerStore);
+const {managers} = storeToRefs(usePlayerStore());
+const {fetchManagers} = usePlayerStore();
 
 const getBoostDescription
   = ({batterBoost, pitcherBoost}) => `batterBoost: ${batterBoost}, pitcherBoost: ${pitcherBoost}`;

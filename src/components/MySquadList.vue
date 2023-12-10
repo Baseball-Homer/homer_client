@@ -115,11 +115,13 @@ import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
 import {useSquadStore} from "@/store/squad";
 
+const {players} = storeToRefs(useSquadStore());
+
 const router = useRouter();
 const goSquad = () => router.push('/squad');
 
 const getName = ({ primaryNum, firstName, lastName }) => `No.${primaryNum}  ${firstName} ${lastName}`;
-const getClubAndPositionName = ({ clubName, position }) => `${clubName} (${position})`;
+const getClubAndPositionName = ({ clubName, positionName }) => `${clubName} (${positionName})`;
 
 const isPitcher = (positionNumber) => positionNumber === 0 || positionNumber === 1;
 
@@ -132,5 +134,4 @@ const extractStat = ({position, gamePlayed, innings, wins, losses, homeruns, pla
 }
 
 const itemsPerPage = shallowRef(3);
-const players = storeToRefs(useSquadStore()).players;
 </script>

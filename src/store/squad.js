@@ -57,7 +57,7 @@ export const useSquadStore = defineStore("squad", {
       const {batterResponses, managerResponse, pitcherResponse} = data;
 
       this.squad = {
-        batter: { positionName: positionCodes[batterResponses.position], ...batterResponses},
+        batter: batterResponses.map(batter=>({ ...batter, positionName: positionCodes[batter.position]})),
         manager: managerResponse,
         pitcher: { positionName: positionCodes[pitcherResponse.position], ...pitcherResponse}
       }

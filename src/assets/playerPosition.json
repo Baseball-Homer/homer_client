@@ -1,13 +1,13 @@
 {
   "0" : "Bullpen Pitcher",
   "1" : "Starting Pitcher",
-  "2" : "Bullpen Pitcher",
-  "3" : "Catcher",
-  "4" : "First Base",
-  "5" : "Second Base",
-  "6" : "Third Base",
-  "7" : "Short Stop",
-  "8" : "Left Field",
+  "2" : "Catcher",
+  "3" : "First Base",
+  "4" : "Second Base",
+  "5" : "Third Base",
+  "6" : "Short Stop",
+  "7" : "Left Field",
+  "8" : "Center Field",
   "9" : "Right Field",
   "10" : "Designated Hitter"
 }

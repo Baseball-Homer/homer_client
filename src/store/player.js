@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import api from "@/api";
 
-export const usePlayerStore = defineStore("squad", {
+export const usePlayerStore = defineStore("player", {
   state: () => ({
     players: [], managers: {}
   }),
