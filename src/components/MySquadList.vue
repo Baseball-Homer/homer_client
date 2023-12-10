@@ -3,12 +3,17 @@
     :items="players"
     :items-per-page="itemsPerPage"
   >
+    <template #no-data>
+      <div class="ml-4 text-h4 mt-16">
+        Click <strong>"EDIT SQUAD"</strong> button to create your squad ⚾⚾
+      </div>
+    </template>
     <template #header="{ page, pageCount, prevPage, nextPage }">
       <div
         class="d-flex justify-space-between mb-4"
       >
         <div class="text-h4 font-weight-bold ma-3">
-          내 스쿼드
+          My Squad
         </div>
 
         <div class="d-flex align-center">
@@ -17,7 +22,7 @@
             prepend-icon="mdi-baseball-diamond"
             @click="goSquad"
           >
-            내 스쿼드 편집
+            Edit Squad
           </v-btn>
 
           <div class="d-inline-flex mr-4">
@@ -52,7 +57,7 @@
         >
           <v-sheet border>
             <v-img
-              :src="item.raw.image"
+              :src="item.raw.playerPhoto"
               max-width="300px"
               max-height="410px"
             />
@@ -74,9 +79,8 @@
               density="compact"
               class="text-caption"
             >
-              <!--TODO 한글로 변경  -->
               <tbody
-                v-for="(value, key) in item.raw.stats"
+                v-for="(value, key) in extractStat(item.raw)"
                 :key="key"
               >
                 <tr align="right">
@@ -91,7 +95,10 @@
       </v-row>
     </template>
 
-    <template #footer="{ page, pageCount }">
+    <template
+      v-if="players.length"
+      #footer="{ page, pageCount }"
+    >
       <v-footer
         color="surface-variant"
         class="justify-space-between text-body-2 mt-4"
@@ -103,82 +110,27 @@
 </template>
 
 <script setup>
-import { ref, shallowRef } from "vue";
+import {shallowRef} from "vue";
 import {useRouter} from "vue-router";
+import {storeToRefs} from "pinia";
+import {useSquadStore} from "@/store/squad";
 
 const router = useRouter();
 const goSquad = () => router.push('/squad');
 
-const getName = ({ firstName, lastName }) => `${firstName} ${lastName}`;
-const getClubAndPositionName = ({ clubName, positionName }) =>
-  `${clubName} (${positionName})`;
+const getName = ({ primaryNum, firstName, lastName }) => `No.${primaryNum}  ${firstName} ${lastName}`;
+const getClubAndPositionName = ({ clubName, position }) => `${clubName} (${position})`;
+
+const isPitcher = (positionNumber) => positionNumber === 0 || positionNumber === 1;
+
+const extractStat = ({position, gamePlayed, innings, wins, losses, homeruns, plates}) => {
+  if (isPitcher(position)) {
+    return {gamePlayed, innings, wins, losses};
+  } else {
+    return {gamePlayed, homeruns, plates};
+  }
+}
 
 const itemsPerPage = shallowRef(3);
-const mockPlayers = [
-  {
-    firstName: "Justin",
-    lastName: "Verlander",
-    clubName: "Houston Astros",
-    positionName: "선발 투수",
-    stats: {
-      gamePlayedCount: 1,
-      gameStartedCount: 2,
-      innings: 5,
-      wins: 1,
-      losses: 20,
-      saves: 5,
-      era: 5.32,
-    },
-    image:
-      "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/450203/headshot/67/current",
-  },
-  {
-    firstName: "Kenley",
-    lastName: "Jansen",
-    clubName: "Boston Red Sox",
-    positionName: "선발 투수",
-    stats: {
-      gamePlayedCount: 1,
-      gameStartedCount: 2,
-      innings: 5,
-      wins: 1,
-      losses: 20,
-      saves: 5,
-      era: 5.32,
-    },
-    image:
-      "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/445276/headshot/67/current",
-  },
-  {
-    firstName: "Charlie",
-    lastName: "Morton",
-    clubName: "Atlanta Braves",
-    positionName: "선발 투수",
-    stats: {
-      gamePlayedCount: 1,
-      gameStartedCount: 2,
-      innings: 5,
-      wins: 1,
-      losses: 20,
-      saves: 5,
-      era: 5.32,
-    },
-    image:
-      "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/453268/headshot/67/current",
-  },
-  {
-    name: "SteelSeries Rival 3",
-    firstName: "Daniel",
-    lastName: "Bard",
-    dpi: 8500,
-    buttons: 6,
-    weight: "77g",
-    wireless: false,
-    price: 29.99,
-    description: "SteelSeries Rival 3",
-    src: "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/453268/headshot/67/current",
-  },
-];
-
-const players = ref(mockPlayers);
+const players = storeToRefs(useSquadStore()).players;
 </script>

@@ -3,14 +3,14 @@ import api from "@/api";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: null, otherUsers: []
+    user: {
+      email: null,
+      ownerName: null,
+      squadId: null,
+      userId: null
+    },
+    otherUsers: []
   }),
-  // getters: {
-  //   getUser: (state) => {
-  //     return state.user;
-  //   }
-  // },
-
   actions: {
     async fetchAll(userId) {
       await this.fetchUser(userId);

@@ -5,13 +5,13 @@
   >
     <v-list lines="two">
       <v-list-subheader>
-        내 친구들
+        Rival Users
       </v-list-subheader>
 
       <v-list-item
-        v-for="friend in friends"
+        v-for="friend in otherUsers"
         :key="friend.userId"
-        :title="friend.name"
+        :title="friend.ownerName"
       >
         <template #prepend>
           <v-avatar>
@@ -25,7 +25,7 @@
               append-icon="mdi-baseball"
               @click="goMatch"
             >
-              대결하기
+              Match
             </v-btn>
           </div>
         </template>
@@ -35,29 +35,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import {useRouter} from "vue-router";
+import {storeToRefs} from "pinia";
+import {useUserStore} from "@/store/user";
 
 const router = useRouter();
 const goMatch = () => router.push("/match");
 
-const mockFriends = [
-  {
-    userId: 1,
-    name: "이정렬",
-  },
-  {
-    userId: 2,
-    name: "김정렬",
-  },
-  {
-    userId: 3,
-    name: "박정렬",
-  },
-  {
-    userId: 4,
-    name: "홍정렬",
-  },
-];
-const friends = ref(mockFriends);
+const {otherUsers} = storeToRefs(useUserStore());
 </script>

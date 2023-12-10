@@ -16,7 +16,6 @@
             <v-sheet
               class="mt-5"
               rounded="lg"
-              min-height="268"
             >
               <friend-list />
             </v-sheet>
@@ -47,10 +46,10 @@ import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
 import {onMounted} from "vue";
 
+const userStore = useUserStore();
+const squadStore = useSquadStore();
 
 onMounted(async ()=>{
-  const userStore = useUserStore();
-  const squadStore = useSquadStore();
   await userStore.fetchAll(1);
   await squadStore.fetchAll();
 });
