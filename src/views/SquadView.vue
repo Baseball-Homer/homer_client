@@ -1,16 +1,5 @@
 <template>
   <v-app class="app">
-<!--    <v-list-item-->
-<!--      v-for="(item,idx) in Array.from({length: 10})"-->
-<!--      :key="idx"-->
-<!--    >-->
-<!--      <v-img-->
-<!--        :src="!players.has(idx) ? addImageUrl : players.get(idx).image"-->
-<!--        width="50px"-->
-<!--        height="50px"-->
-<!--        @click="()=>onClickPlayerAddButton(idx)"-->
-<!--      />-->
-<!--    </v-list-item>-->
     <v-row />
     <v-row />
     <v-row />
