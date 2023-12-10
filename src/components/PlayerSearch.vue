@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-title>
-          <span class="text-h5">선수 검색</span>
+          <span class="text-h5">Search Players</span>
         </v-card-title>
         <v-row>
           <v-col
@@ -18,7 +18,7 @@
               :items="clubs"
               item-title="name"
               item-value="id"
-              label="소속팀"
+              label="Club"
               density="compact"
             />
           </v-col>
@@ -28,7 +28,7 @@
           >
             <v-text-field
               v-model="inputPlayerName"
-              placeholder="선수 명을 입력해주세요"
+              placeholder="Player's Name"
               density="compact"
             />
           </v-col>
@@ -37,12 +37,12 @@
               prepend-icon="mdi-magnify"
               @click="emitSearch"
             >
-              검색
+              Search
             </v-btn>
           </v-col>
         </v-row>
         <v-list>
-          <v-list-subheader>검색 결과</v-list-subheader>
+          <v-list-subheader>Results</v-list-subheader>
 
           <v-radio-group v-model="selectedPlayerId">
             <v-list-item
@@ -105,14 +105,14 @@
             variant="text"
             @click="emitSave"
           >
-            추가
+            Apply
           </v-btn>
           <v-btn
             color="green-darken-1"
             variant="text"
             @click="() => emit('close')"
           >
-            닫기
+            Close
           </v-btn>
         </v-card-actions>
       </v-card>
