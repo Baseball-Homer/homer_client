@@ -12,10 +12,10 @@
       >
         <v-img
           class="mx-auto"
-          :src="!players[8] ? addImageUrl : players[8].playerPhoto"
+          :src="!players[7] ? addImageUrl : players[7].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(8)"
+          @click="()=>onClickPlayerAddButton(7)"
         />
       </v-col>
       <v-spacer />
@@ -27,18 +27,18 @@
       <v-col cols="3">
         <v-img
           class="ml-16"
-          :src="!players[7] ? addImageUrl : players[7].playerPhoto"
+          :src="!players[6] ? addImageUrl : players[6].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(7)"
+          @click="()=>onClickPlayerAddButton(6)"
         />
       </v-col>
       <v-col cols="5">
         <v-img
-          :src="!players[9] ? addImageUrl : players[9].playerPhoto"
+          :src="!players[8] ? addImageUrl : players[8].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(9)"
+          @click="()=>onClickPlayerAddButton(8)"
         />
       </v-col>
     </v-row>
@@ -50,19 +50,19 @@
       <v-col cols="1">
         <v-img
           class="mx-auto"
-          :src="!players[6] ? addImageUrl : players[6].playerPhoto"
+          :src="!players[5] ? addImageUrl : players[5].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(6)"
+          @click="()=>onClickPlayerAddButton(5)"
         />
       </v-col>
       <v-col cols="1">
         <v-img
           class="mx-auto"
-          :src="!players[4] ? addImageUrl : players[4].playerPhoto"
+          :src="!players[3] ? addImageUrl : players[3].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(4)"
+          @click="()=>onClickPlayerAddButton(3)"
         />
       </v-col>
     </v-row>
@@ -76,28 +76,28 @@
       >
         <v-img
           class="mx-13"
-          :src="!players[5] ? addImageUrl : players[5].playerPhoto"
+          :src="!players[4] ? addImageUrl : players[4].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(5)"
+          @click="()=>onClickPlayerAddButton(4)"
         />
       </v-col>
       <v-col cols="1">
         <v-img
           class="mx-auto"
-          :src="!players[1] ? addImageUrl : players[1].playerPhoto"
+          :src="!players[0] ? addImageUrl : players[0].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(1)"
+          @click="()=>onClickPlayerAddButton(0)"
         />
       </v-col>
       <v-col cols="1">
         <v-img
           class="mx-5"
-          :src="!players[3] ? addImageUrl : players[3].playerPhoto"
+          :src="!players[2] ? addImageUrl : players[2].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(3)"
+          @click="()=>onClickPlayerAddButton(2)"
         />
       </v-col>
     </v-row>
@@ -116,19 +116,19 @@
       <v-col cols="3">
         <v-img
           class="mx-auto"
-          :src="!players[2] ? addImageUrl : players[2].playerPhoto"
+          :src="!players[1] ? addImageUrl : players[1].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(2)"
+          @click="()=>onClickPlayerAddButton(1)"
         />
       </v-col>
       <v-col cols="3">
         <v-img
           class="mx-16"
-          :src="!players[10] ? addImageUrl : players[10].playerPhoto"
+          :src="!players[9] ? addImageUrl : players[9].playerPhoto"
           width="50px"
           height="50px"
-          @click="()=>onClickPlayerAddButton(10)"
+          @click="()=>onClickPlayerAddButton(9)"
         />
       </v-col>
     </v-row>
