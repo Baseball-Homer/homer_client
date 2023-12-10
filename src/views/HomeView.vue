@@ -43,4 +43,16 @@
 import Manager from "@/components/Manager.vue";
 import FriendList from "@/components/FriendList.vue";
 import MySquadList from "@/components/MySquadList.vue";
+import {useUserStore} from "@/store/user";
+import {useSquadStore} from "@/store/squad";
+import {onMounted} from "vue";
+
+
+onMounted(async ()=>{
+  const userStore = useUserStore();
+  const squadStore = useSquadStore();
+  await userStore.fetchAll(1);
+  await squadStore.fetchAll();
+});
+
 </script>
