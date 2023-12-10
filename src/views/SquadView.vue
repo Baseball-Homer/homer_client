@@ -10,12 +10,9 @@
       <v-col
         cols="1"
       >
-        <v-img
-          class="mx-auto"
-          :src="!players[7] ? addImageUrl : players[7].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(7)"
+        <squad-player
+          :player="players[7]"
+          @open="()=>onClickPlayerAddButton(7)"
         />
       </v-col>
       <v-spacer />
@@ -23,22 +20,16 @@
     <v-row
       class="justify-center"
     >
-      <v-spacer />
       <v-col cols="3">
-        <v-img
-          class="ml-16"
-          :src="!players[6] ? addImageUrl : players[6].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(6)"
+        <squad-player
+          :player="players[6]"
+          @open="()=>onClickPlayerAddButton(6)"
         />
       </v-col>
-      <v-col cols="5">
-        <v-img
-          :src="!players[8] ? addImageUrl : players[8].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(8)"
+      <v-col cols="3">
+        <squad-player
+          :player="players[8]"
+          @open="()=>onClickPlayerAddButton(8)"
         />
       </v-col>
     </v-row>
@@ -48,21 +39,15 @@
       class="justify-center"
     >
       <v-col cols="1">
-        <v-img
-          class="mx-auto"
-          :src="!players[5] ? addImageUrl : players[5].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(5)"
+        <squad-player
+          :player="players[5]"
+          @open="()=>onClickPlayerAddButton(5)"
         />
       </v-col>
       <v-col cols="1">
-        <v-img
-          class="mx-auto"
-          :src="!players[3] ? addImageUrl : players[3].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(3)"
+        <squad-player
+          :player="players[3]"
+          @open="()=>onClickPlayerAddButton(3)"
         />
       </v-col>
     </v-row>
@@ -74,30 +59,21 @@
         cols="1"
         style="padding-right:0"
       >
-        <v-img
-          class="mx-13"
-          :src="!players[4] ? addImageUrl : players[4].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(4)"
+        <squad-player
+          :player="players[4]"
+          @open="()=>onClickPlayerAddButton(4)"
         />
       </v-col>
       <v-col cols="1">
-        <v-img
-          class="mx-auto"
-          :src="!players[0] ? addImageUrl : players[0].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(0)"
+        <squad-player
+          :player="players[0]"
+          @open="()=>onClickPlayerAddButton(0)"
         />
       </v-col>
       <v-col cols="1">
-        <v-img
-          class="mx-5"
-          :src="!players[2] ? addImageUrl : players[2].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(2)"
+        <squad-player
+          :player="players[2]"
+          @open="()=>onClickPlayerAddButton(2)"
         />
       </v-col>
     </v-row>
@@ -108,27 +84,21 @@
       <v-col cols="3">
         <v-img
           :src="manager === null ? addImageUrl : manager.photo"
-          width="50px"
-          height="50px"
+          width="100px"
+          height="100px"
           @click="onClickManagerAdd"
         />
       </v-col>
       <v-col cols="3">
-        <v-img
-          class="mx-auto"
-          :src="!players[1] ? addImageUrl : players[1].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(1)"
+        <squad-player
+          :player="players[1]"
+          @open="()=>onClickPlayerAddButton(1)"
         />
       </v-col>
       <v-col cols="3">
-        <v-img
-          class="mx-16"
-          :src="!players[9] ? addImageUrl : players[9].playerPhoto"
-          width="50px"
-          height="50px"
-          @click="()=>onClickPlayerAddButton(9)"
+        <squad-player
+          :player="players[9]"
+          @open="()=>onClickPlayerAddButton(9)"
         />
       </v-col>
     </v-row>
@@ -165,6 +135,7 @@ import {usePlayerStore} from "@/store/player";
 import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
 import {useRoute} from "vue-router";
+import SquadPlayer from "@/components/SquadPlayer.vue";
 
 const {fetchPlayers, resetPlayers} = usePlayerStore();
 const {user} = useUserStore();
@@ -226,7 +197,7 @@ const searchPlayer = ({clubId, playerName}) => {
 }
 
 .v-row {
-  height: 50px;
+  height: 100px;
 }
 
 .v-col {
