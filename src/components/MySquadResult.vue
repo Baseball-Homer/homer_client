@@ -14,9 +14,10 @@
       ({{ `${squadStat.totalWins} win/${squadStat.totalLoses} loses` }})
     </v-card-title>
     <v-divider />
-    <v-card-text>
-      <h3>Home Win Rate : {{ squadStat.homeWinRate }}%</h3>
-      <h3>Away Win Rate : {{ squadStat.awayWinRate }}%</h3>
+    <v-card-text class="text-h5">
+      Home Win Rate : <span class="text-blue font-weight-bold">{{ squadStat.homeWinRate }}%</span>
+      <br><br>
+      Away Win Rate : <span class="text-red font-weight-bold">{{ squadStat.awayWinRate }}%</span>
     </v-card-text>
   </v-card>
 </template>
