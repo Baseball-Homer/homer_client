@@ -17,7 +17,7 @@
               v-model="selectedClubId"
               :items="clubs"
               item-title="name"
-              item-value="id"
+              item-value="clubId"
               label="Club"
               density="compact"
             />
@@ -46,16 +46,16 @@
 
           <v-radio-group v-model="selectedPlayerId">
             <v-list-item
-              v-for="(item, i) in mockPlayers"
+              v-for="(item, i) in players"
               :key="i"
               :value="item"
               color="primary"
               rounded="xl"
             >
               <template #prepend>
-                <v-radio :value="item.id" />
+                <v-radio :value="item.playerId" />
                 <v-img
-                  :src="item.image"
+                  :src="item.playerPhoto"
                   height="100px"
                   width="50px"
                 >
@@ -93,7 +93,9 @@
                 </v-img>
               </template>
 
-              <v-list-item-title>{{ item.firstName }}</v-list-item-title>
+              <v-list-item-title class="ml-5">
+                {{ `${item.firstName} ${item.lastName}` }}
+              </v-list-item-title>
             </v-list-item>
           </v-radio-group>
         </v-list>
@@ -122,9 +124,14 @@
 
 <script setup>
 import {ref} from "vue";
+import {clubs} from "@/assets/club.json";
+import {usePlayerStore} from "@/store/player";
+import {storeToRefs} from "pinia";
 
-const getName = ({ firstName, lastName }) => `${firstName} ${lastName}`;
-const getClubAndPositionName = ({ clubName, positionName }) =>
+const {players} = storeToRefs(usePlayerStore());
+
+const getName = ({firstName, lastName}) => `${firstName} ${lastName}`;
+const getClubAndPositionName = ({clubName, positionName}) =>
   `${clubName} (${positionName})`;
 
 const props = defineProps({
@@ -136,87 +143,21 @@ const selectedClubId = ref(null);
 const selectedPlayerId = ref(null);
 const inputPlayerName = ref(null);
 
-const mockPlayers = [
-  {
-    id: 1,
-    firstName: "Justin",
-    lastName: "Verlander",
-    clubName: "Houston Astros",
-    positionName: "선발 투수",
-    stats: {
-      gamePlayedCount: 1,
-      gameStartedCount: 2,
-      innings: 5,
-      wins: 1,
-      losses: 20,
-      saves: 5,
-      era: 5.32,
-    },
-    image:
-      "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/450203/headshot/67/current",
-  },
-  {
-    id: 2,
-    firstName: "Kenley",
-    lastName: "Jansen",
-    clubName: "Boston Red Sox",
-    positionName: "선발 투수",
-    stats: {
-      gamePlayedCount: 1,
-      gameStartedCount: 2,
-      innings: 5,
-      wins: 1,
-      losses: 20,
-      saves: 5,
-      era: 5.32,
-    },
-    image:
-      "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/445276/headshot/67/current",
-  },
-  {
-    id: 3,
-    firstName: "Charlie",
-    lastName: "Morton",
-    clubName: "Atlanta Braves",
-    positionName: "선발 투수",
-    stats: {
-      gamePlayedCount: 1,
-      gameStartedCount: 2,
-      innings: 5,
-      wins: 1,
-      losses: 20,
-      saves: 5,
-      era: 5.32,
-    },
-    image:
-      "https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/453268/headshot/67/current",
-  },
-];
-const clubs = [
-  {
-    id: 1,
-    name: 'Los Angeles Angels'
-  },
-  {
-    id: 2,
-    name: 'Arizona Diamondbacks'
-  },
-  {
-    id: 3,
-    name: 'Chicago Cubs'
-  }
-];
-
-const emit = defineEmits(['save', 'close','search']);
+const emit = defineEmits(['save', 'close', 'search']);
 const emitSave = () => {
-  const selectedPlayer = mockPlayers.find(it=>it.id === selectedPlayerId.value);
+  const selectedPlayer = players.value.find(it => it.playerId === selectedPlayerId.value);
   emit('save', props.position, selectedPlayer);
   emit('close');
 };
 const emitSearch = () => {
-  emit('search',{
-     clubId: selectedClubId.value,
-     playerName: inputPlayerName.value
+  if (!selectedClubId.value) {
+    alert('Club is a required search condition!');
+    return;
+  }
+
+  emit('search', {
+    clubId: selectedClubId.value,
+    playerName: inputPlayerName.value
   })
 }
 </script>

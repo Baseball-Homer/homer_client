@@ -12,7 +12,7 @@
       >
         <v-img
           class="mx-auto"
-          :src="!players.has(8) ? addImageUrl : players.get(8).image"
+          :src="!players.has(8) ? addImageUrl : players.get(8).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(8)"
@@ -27,7 +27,7 @@
       <v-col cols="3">
         <v-img
           class="ml-16"
-          :src="!players.has(7) ? addImageUrl : players.get(7).image"
+          :src="!players.has(7) ? addImageUrl : players.get(7).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(7)"
@@ -35,7 +35,7 @@
       </v-col>
       <v-col cols="5">
         <v-img
-          :src="!players.has(9) ? addImageUrl : players.get(9).image"
+          :src="!players.has(9) ? addImageUrl : players.get(9).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(9)"
@@ -50,7 +50,7 @@
       <v-col cols="1">
         <v-img
           class="mx-auto"
-          :src="!players.has(6) ? addImageUrl : players.get(6).image"
+          :src="!players.has(6) ? addImageUrl : players.get(6).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(6)"
@@ -59,7 +59,7 @@
       <v-col cols="1">
         <v-img
           class="mx-auto"
-          :src="!players.has(4) ? addImageUrl : players.get(4).image"
+          :src="!players.has(4) ? addImageUrl : players.get(4).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(4)"
@@ -76,7 +76,7 @@
       >
         <v-img
           class="mx-13"
-          :src="!players.has(5) ? addImageUrl : players.get(5).image"
+          :src="!players.has(5) ? addImageUrl : players.get(5).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(5)"
@@ -85,7 +85,7 @@
       <v-col cols="1">
         <v-img
           class="mx-auto"
-          :src="!players.has(1) ? addImageUrl : players.get(1).image"
+          :src="!players.has(1) ? addImageUrl : players.get(1).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(1)"
@@ -94,7 +94,7 @@
       <v-col cols="1">
         <v-img
           class="mx-5"
-          :src="!players.has(3) ? addImageUrl : players.get(3).image"
+          :src="!players.has(3) ? addImageUrl : players.get(3).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(3)"
@@ -107,7 +107,7 @@
     >
       <v-col cols="3">
         <v-img
-          :src="manager === null ? addImageUrl : manager.image"
+          :src="manager === null ? addImageUrl : manager.photo"
           width="50px"
           height="50px"
           @click="onClickManagerAdd"
@@ -116,7 +116,7 @@
       <v-col cols="3">
         <v-img
           class="mx-auto"
-          :src="!players.has(2) ? addImageUrl : players.get(2).image"
+          :src="!players.has(2) ? addImageUrl : players.get(2).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(2)"
@@ -125,15 +125,13 @@
       <v-col cols="3">
         <v-img
           class="mx-16"
-          :src="!players.has(10) ? addImageUrl : players.get(10).image"
+          :src="!players.has(10) ? addImageUrl : players.get(10).playerPhoto"
           width="50px"
           height="50px"
           @click="()=>onClickPlayerAddButton(10)"
         />
       </v-col>
     </v-row>
-
-
 
     <PlayerSearch
       :show-dialog="showPlayerPopup"
@@ -163,6 +161,9 @@
 import {ref} from "vue";
 import PlayerSearch from "@/components/PlayerSearch.vue";
 import ManagerSearch from "@/components/ManagerSearch.vue";
+import {usePlayerStore} from "@/store/player";
+
+const {fetchPlayers, resetPlayers} = usePlayerStore();
 
 const addImageUrl = 'src/assets/add.png';
 const manager = ref(null);
@@ -176,7 +177,10 @@ const onClickPlayerAddButton = (positionIndex) => {
   showPlayerPopup.value = !showPlayerPopup.value;
   position.value = positionIndex;
 };
-const onClickPlayerPopupClose = () => showPlayerPopup.value = !showPlayerPopup.value;
+const onClickPlayerPopupClose = () => {
+  showPlayerPopup.value = !showPlayerPopup.value;
+  resetPlayers();
+}
 
 const onClickManagerAdd = () => (showManagerPopup.value = !showManagerPopup.value);
 const onClickSaveButton = () => alert('Squad Saved'); //TODO API 연동
@@ -184,9 +188,12 @@ const onClickSaveButton = () => alert('Squad Saved'); //TODO API 연동
 const setManager = selectedManager => manager.value = selectedManager;
 const setPlayer = (position, selectedPlayer) => players.value.set(position, selectedPlayer);
 
-const searchPlayer = ({ clubId, playerName}) => {
-  //TODO API 연동
-  alert(`clubId : ${clubId} playerName: ${playerName}`);
+const searchPlayer = ({clubId, playerName}) => {
+  fetchPlayers({
+    position: position.value,
+    clubId,
+    playerName
+  });
 }
 </script>
 
