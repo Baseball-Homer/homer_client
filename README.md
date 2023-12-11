@@ -1,35 +1,13 @@
 # Homer
 
-## Project setup
+## Installation And Run
 
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
 npm run dev
-
 ```
 
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Prettier format files
-```
-npm run format
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
+## Caution 
+- Please run homer-server first before running homer.
+- The definition for homer-server url is in `.env`
+- The default is localhost:8080
