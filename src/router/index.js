@@ -17,7 +17,7 @@ const routes = [
     component: () => import("@/views/SquadView.vue"),
   },
   {
-    path: "/match/:userId",
+    path: "/match",
     component: () => import("@/views/MatchView.vue"),
   },
 ];

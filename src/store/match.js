@@ -8,7 +8,13 @@ export const useMatchStore = defineStore("match", {
   actions: {
     async fetchMatches(userId, awayId) {
       const {data} = await api.match.createMatch(userId, awayId);
-      this.matches = data;
+
+      this.matches = Object.entries(data).map(([inning, reply]) => {
+        const score = reply[reply.length - 1];
+        reply.splice(reply.length - 1, 1);
+
+        return {inning, reply, score}
+      })
     },
   },
 });

@@ -46,9 +46,8 @@ const {user} = storeToRefs(useUserStore());
 
 const goMatch = async (awayId) => {
   const userId = user.value.squadId;
-  console.log(awayId);
   await matchStore.fetchMatches(userId, awayId);
-  await router.push(`/match/${userId}?awayId=${awayId}`);
+  await router.push({ path: '/match', query: { homeId: userId, awayId: awayId }});
 }
 
 const {otherUsers} = storeToRefs(useUserStore());
