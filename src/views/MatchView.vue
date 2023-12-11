@@ -37,8 +37,8 @@
         align="start"
       >
         <v-timeline-item
-          v-for="(match, i) in matches"
-          :key="i"
+          v-for="(match,i) in result"
+          :key="match.inning"
           size="small"
         >
           <template #opposite>
@@ -76,6 +76,7 @@ import {useMatchStore} from "@/store/match";
 import MatchResult from "@/components/MatchResult.vue";
 import {useRoute} from "vue-router";
 import {useUserStore} from "@/store/user";
+import {reactive} from "vue";
 
 const getInningName = (i) => i % 2 === 0 ? `${Math.floor(i / 2) + 1} Inning Top` : `${Math.floor(i / 2) + 1} Inning Bottom`;
 
@@ -87,6 +88,7 @@ const {awayId} = route.query;
 
 const {user, otherUsers} = storeToRefs(userStore);
 const awayUser = otherUsers.value.find(it => it.userId == awayId);
+const result = reactive([]);
 
 const reduceScore = (matches, filter) => matches.value
   .filter(filter)
@@ -96,6 +98,12 @@ const reduceScore = (matches, filter) => matches.value
 
 const homeScore = reduceScore(matches, (it, idx) => idx % 2 !== 0);
 const awayScore = reduceScore(matches, (it, idx) => idx % 2 === 0);
+
+let idx = 0;
+setInterval(()=>{
+  result[idx] = matches.value[idx];
+  idx++;
+},1000);
 
 
 </script>
