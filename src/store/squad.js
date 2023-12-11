@@ -40,6 +40,9 @@ export const useSquadStore = defineStore("squad", {
     },
     players: (state) => {
       const {batter, pitcher} = state.squad;
+
+      if(!batter.length) return [];
+
       return [pitcher, ...batter];
     }
   },
@@ -47,6 +50,8 @@ export const useSquadStore = defineStore("squad", {
   actions: {
     async fetchAll() {
       const {user} = useUserStore();
+
+      if(!user.squadId) return;
 
       await this.fetchSquad(user.squadId);
       await this.fetchSquadStatistics(user.userId);
@@ -68,6 +73,8 @@ export const useSquadStore = defineStore("squad", {
 
     async fetchSquadStatistics(userId) {
       const {data} = await api.squad.getSquadStatistics(userId);
+
+      if(!data.totalRate) return;
       this.squadStat = data;
     },
 
@@ -77,6 +84,17 @@ export const useSquadStore = defineStore("squad", {
 
     async createSquad(req){
       await api.squad.createSquad(req);
+    },
+
+    setManager(manager){
+      this.squad.manager = manager;
+    },
+    setPlayer(positionIndex, player){
+      if(positionIndex === 0){
+        this.squad.pitcher = player;
+      } else {
+        this.squad.batter[positionIndex - 1] = player;
+      }
     }
   }
 });

@@ -12,7 +12,7 @@
       >
         <squad-player
           :player="players[7]"
-          @open="()=>onClickPlayerAddButton(8)"
+          @open="()=>onClickPlayerAddButton(7)"
         />
       </v-col>
       <v-spacer />
@@ -83,7 +83,7 @@
     >
       <v-col cols="3">
         <v-img
-          :src="manager === null ? addImageUrl : manager.photo"
+          :src="!manager.photo ? addImageUrl : manager.photo"
           width="100px"
           height="100px"
           @click="onClickManagerAdd"
@@ -140,7 +140,7 @@ import {storeToRefs} from "pinia";
 
 const {fetchPlayers, resetPlayers} = usePlayerStore();
 const {user} = useUserStore();
-const {createSquad, updateSquad} = useSquadStore();
+const {createSquad, updateSquad, setManager, setPlayer} = useSquadStore();
 const {players, manager} = storeToRefs(useSquadStore());
 const route = useRoute();
 const {mode} = route.query;
@@ -168,13 +168,12 @@ const onClickSaveButton = () => {
 
   const req = {managerId, userId, squadId, players: playerReqs};
 
+  console.log(req);
+
   mode === 'new' ? createSquad(req) : updateSquad(req);
 
   alert('success!');
 }
-
-const setManager = selectedManager => manager.value = selectedManager;
-const setPlayer = (position, selectedPlayer) => players.value[position] = selectedPlayer;
 
 const searchPlayer = ({clubId, playerName}) => {
   fetchPlayers({
