@@ -177,7 +177,7 @@ const onClickSaveButton = () => {
 
 const searchPlayer = ({clubId, playerName}) => {
   fetchPlayers({
-    position: position.value,
+    position: position.value + 1,
     clubId,
     playerName
   });
