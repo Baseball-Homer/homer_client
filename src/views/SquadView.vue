@@ -12,7 +12,7 @@
       >
         <squad-player
           :player="players[7]"
-          @open="()=>onClickPlayerAddButton(8)"
+          @open="()=>onClickPlayerAddButton(7)"
         />
       </v-col>
       <v-spacer />
@@ -23,13 +23,13 @@
       <v-col cols="3">
         <squad-player
           :player="players[6]"
-          @open="()=>onClickPlayerAddButton(7)"
+          @open="()=>onClickPlayerAddButton(6)"
         />
       </v-col>
       <v-col cols="3">
         <squad-player
           :player="players[8]"
-          @open="()=>onClickPlayerAddButton(9)"
+          @open="()=>onClickPlayerAddButton(8)"
         />
       </v-col>
     </v-row>
@@ -41,13 +41,13 @@
       <v-col cols="1">
         <squad-player
           :player="players[5]"
-          @open="()=>onClickPlayerAddButton(6)"
+          @open="()=>onClickPlayerAddButton(5)"
         />
       </v-col>
       <v-col cols="1">
         <squad-player
           :player="players[3]"
-          @open="()=>onClickPlayerAddButton(4)"
+          @open="()=>onClickPlayerAddButton(3)"
         />
       </v-col>
     </v-row>
@@ -61,19 +61,19 @@
       >
         <squad-player
           :player="players[4]"
-          @open="()=>onClickPlayerAddButton(5)"
+          @open="()=>onClickPlayerAddButton(4)"
         />
       </v-col>
       <v-col cols="1">
         <squad-player
           :player="players[0]"
-          @open="()=>onClickPlayerAddButton(1)"
+          @open="()=>onClickPlayerAddButton(0)"
         />
       </v-col>
       <v-col cols="1">
         <squad-player
           :player="players[2]"
-          @open="()=>onClickPlayerAddButton(3)"
+          @open="()=>onClickPlayerAddButton(2)"
         />
       </v-col>
     </v-row>
@@ -92,13 +92,13 @@
       <v-col cols="3">
         <squad-player
           :player="players[1]"
-          @open="()=>onClickPlayerAddButton(2)"
+          @open="()=>onClickPlayerAddButton(1)"
         />
       </v-col>
       <v-col cols="3">
         <squad-player
           :player="players[9]"
-          @open="()=>onClickPlayerAddButton(10)"
+          @open="()=>onClickPlayerAddButton(9)"
         />
       </v-col>
     </v-row>
