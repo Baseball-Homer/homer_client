@@ -17,9 +17,12 @@
     </v-card-title>
     <v-divider />
     <v-card-text>
-      <div>pitcher boost : +{{ manager.pitcherBoost }}</div>
-
-      <div>batter boost : +{{ manager.batterBoost }}</div>
+      <div
+        v-for="item in manager.managerBoosts"
+        :key="item.ability"
+      >
+        {{ `${item.ability} : +${item.abilityValue}` }}
+      </div>
     </v-card-text>
   </v-card>
 </template>

@@ -67,7 +67,7 @@ const {managers} = storeToRefs(usePlayerStore());
 const {fetchManagers} = usePlayerStore();
 
 const getBoostDescription
-  = ({batterBoost, pitcherBoost}) => `batterBoost: ${batterBoost}, pitcherBoost: ${pitcherBoost}`;
+  = ({ managerBoosts }) => managerBoosts.map(it=> `${it.ability} : +${it.abilityValue}`).join(" ")
 
 onMounted(async () => {
   await fetchManagers();
