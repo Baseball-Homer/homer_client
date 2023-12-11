@@ -23,7 +23,7 @@
           <div class="text-center">
             <v-btn
               append-icon="mdi-baseball"
-              @click="goMatch"
+              @click="goMatch(friend.squadId)"
             >
               Match
             </v-btn>
@@ -38,9 +38,18 @@
 import {useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
 import {useUserStore} from "@/store/user";
+import {useMatchStore} from "@/store/match";
 
 const router = useRouter();
-const goMatch = () => router.push("/match");
+const matchStore = useMatchStore();
+const {user} = storeToRefs(useUserStore());
+
+const goMatch = async (awayId) => {
+  const userId = user.value.squadId;
+  console.log(awayId);
+  await matchStore.fetchMatches(userId, awayId);
+  await router.push(`/match/${userId}?awayId=${awayId}`);
+}
 
 const {otherUsers} = storeToRefs(useUserStore());
 </script>

@@ -16,6 +16,10 @@ const routes = [
     path: "/squad",
     component: () => import("@/views/SquadView.vue"),
   },
+  {
+    path: "/match/:userId",
+    component: () => import("@/views/MatchView.vue"),
+  },
 ];
 
 const router = createRouter({
