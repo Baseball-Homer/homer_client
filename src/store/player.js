@@ -1,22 +1,20 @@
 import {defineStore} from "pinia";
 import api from "@/api";
 
-export const usePlayerStore = defineStore("player", {
+const STORE_NAME = 'player';
+
+export const usePlayerStore = defineStore(STORE_NAME, {
   state: () => ({
-    players: [], managers: {}
+    players: [], managers: []
   }),
   actions: {
     resetPlayers(){
       this.players = [];
     },
 
-    async fetchPlayers(playerSearchRequest) {
-      const {data} = await api.player.getPlayers(playerSearchRequest);
+    async fetchPlayers(req) {
+      const {data} = await api.player.getPlayers(req);
       this.players = data;
-    },
-
-    resetManagers(){
-      this.players = [];
     },
 
     async fetchManagers() {

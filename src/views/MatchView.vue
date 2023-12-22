@@ -50,6 +50,7 @@
           <div>
             <div
               v-for="reply in match.reply"
+              :key="reply"
               :class="`mb-3 text-h6`"
             >
               <div>
@@ -76,34 +77,39 @@ import {useMatchStore} from "@/store/match";
 import MatchResult from "@/components/MatchResult.vue";
 import {useRoute} from "vue-router";
 import {useUserStore} from "@/store/user";
-import {reactive} from "vue";
+import {onMounted, onUnmounted, reactive} from "vue";
 
 const getInningName = (i) => i % 2 === 0 ? `${Math.floor(i / 2) + 1} Inning Top` : `${Math.floor(i / 2) + 1} Inning Bottom`;
 
 const route = useRoute();
-const {matches} = storeToRefs(useMatchStore());
 const userStore = useUserStore();
+const matchStore = useMatchStore();
+const {homeId, awayId} = route.query;
 
-const {awayId} = route.query;
+const {matches, homeScore, awayScore} = storeToRefs(matchStore);
+const {user} = storeToRefs(userStore);
 
-const {user, otherUsers} = storeToRefs(userStore);
-const awayUser = otherUsers.value.find(it => it.userId == awayId);
+const awayUser = userStore.findOtherUserBySquadId(Number(awayId));
 const result = reactive([]);
 
-const reduceScore = (matches, filter) => matches.value
-  .filter(filter)
-  .map(it=>it.score)
-  .map(it=>Number(it))
-  .reduce((sum,score)=> sum + score);
-
-const homeScore = reduceScore(matches, (it, idx) => idx % 2 !== 0);
-const awayScore = reduceScore(matches, (it, idx) => idx % 2 === 0);
-
 let idx = 0;
-setInterval(()=>{
-  result[idx] = matches.value[idx];
-  idx++;
-},1000);
+let intervalId = 0;
 
+onMounted(async () => {
+  await matchStore.playMatch(homeId, awayId);
+
+  intervalId = setInterval(function () {
+    if (result.length === matches.value.length) {
+      clearInterval(intervalId);
+    }
+
+    result[idx] = matches.value[idx];
+    idx++;
+  }, 1000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
 
 </script>

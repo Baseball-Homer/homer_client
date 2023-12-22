@@ -168,8 +168,6 @@ const onClickSaveButton = () => {
 
   const req = {managerId, userId, squadId, players: playerReqs};
 
-  console.log(req);
-
   mode === 'new' ? createSquad(req) : updateSquad(req);
 
   alert('success!');

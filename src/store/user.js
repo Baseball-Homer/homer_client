@@ -1,14 +1,17 @@
 import {defineStore} from "pinia";
 import api from "@/api";
 
-export const useUserStore = defineStore("user", {
+const STORE_NAME = 'user';
+const DEFAULT_USER = {
+  email: null,
+  ownerName: null,
+  squadId: null,
+  userId: null
+};
+
+export const useUserStore = defineStore(STORE_NAME, {
   state: () => ({
-    user: {
-      email: null,
-      ownerName: null,
-      squadId: null,
-      userId: null
-    },
+    user: DEFAULT_USER,
     otherUsers: []
   }),
   actions: {
@@ -26,6 +29,9 @@ export const useUserStore = defineStore("user", {
     async fetchOtherUser(userId) {
       const {data} = await api.user.getOtherUser(userId);
       this.otherUsers = data;
+    },
+    findOtherUserBySquadId(squadId) {
+      return this.otherUsers.find(it => it.squadId === squadId) || DEFAULT_USER;
     }
   }
 });
