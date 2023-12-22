@@ -129,13 +129,13 @@
 
 <script setup>
 import {ref} from "vue";
-import PlayerSearch from "@/components/PlayerSearch.vue";
-import ManagerSearch from "@/components/ManagerSearch.vue";
+import PlayerSearch from "@/components/squad/PlayerSearch.vue";
+import ManagerSearch from "@/components/squad/manager/ManagerSearch.vue";
 import {usePlayerStore} from "@/store/player";
 import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
 import {useRoute} from "vue-router";
-import SquadPlayer from "@/components/SquadPlayer.vue";
+import SquadPlayer from "@/components/squad/SquadPlayer.vue";
 import {storeToRefs} from "pinia";
 
 const {fetchPlayers, resetPlayers} = usePlayerStore();

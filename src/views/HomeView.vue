@@ -61,14 +61,14 @@
 </template>
 
 <script setup>
-import Manager from "@/components/Manager.vue";
-import FriendList from "@/components/FriendList.vue";
-import MySquadList from "@/components/MySquadList.vue";
+import Manager from "@/components/squad/manager/Manager.vue";
+import FriendList from "@/components/user/FriendList.vue";
+import MySquadList from "@/components/squad/MySquadList.vue";
 import {useUserStore} from "@/store/user";
 import {useSquadStore} from "@/store/squad";
 import {onMounted} from "vue";
-import MyInfo from "@/components/MyInfo.vue";
-import MySquadResult from "@/components/MySquadResult.vue";
+import MyInfo from "@/components/user/MyInfo.vue";
+import MySquadResult from "@/components/squad/MySquadResult.vue";
 
 const userStore = useUserStore();
 const squadStore = useSquadStore();
